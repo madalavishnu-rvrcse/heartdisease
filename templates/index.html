@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+body, html {
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+   background-image: url("hrt1.jpg");
+   background-repeat: repeat-y;
+    min-height: 1000px;
+  background-position: center;
+   background-size: cover;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-img {
+  /* The image used */
+  background-image: url("hrt.jpg");
+
+  min-height: 1000px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: repeat-y;
+  background-size: cover;
+  position: relative;
+}
+
+/* Add styles to the form container */
+.container,.cp,.sex  {
+  position: absolute;
+  left:30%;
+  margin: 20px;
+  max-width: 500px;
+  padding: 16px 40px;
+  background-color: light grey;
+ 
+  opacity:0.5;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=name],select
+{
+  width: 100%;
+  padding: 15px;
+  margin:  22px ;
+  border: none;
+  background: grey;
+  background-color:grey;
+}
+input[type=number], input[type=name],select
+{
+  width: 100%;
+  padding: 15px;
+  margin:  22px ;
+  border: none;
+  background: grey;
+  background-color:grey;
+}
+input[type=text]:focus, input[type=disease] :focus ,select {
+ 
+   background-color: white;
+   outline:none;
+   }
+input[type=number]:focus, input[type=disease] :focus ,select {
+ 
+   background-color: white;
+   outline:none;
+   }
+/* Set a style for the submit button */
+.btn {
+ background-color:grey;
+  padding: 16px 30px;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.7;
+}
+
+.btn:hover {
+ color:black;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<div class="bg-img">
+  <form class="container" action="{{ url_for('predict')}}" method = "post">
+    <h1 style= "font-color:black">PREDICT YOUR HEART DISEASE</h1>
+
+   
+
+    <label for="heart "><b>Age</b></label>
+    <input type="number" placeholder="enter age" name="age" required>
+	<label for="Sex"><b>Sex</b></label>
+	<br>
+	<select id="sex" name="sex">
+	<option selected>Choose your sex</option>
+	<option value=1>male( 1 )</option>
+	<option value=0>Female( 0 )</option>
+	</select>
+	<br>
+	<label for="chest pain"><b>Chest pain</b></label>
+	<br>
+	<select id="cp" name="cp">
+	<option selected>Choose your chest pain</option>
+	<option value=1>Typical angina( 1 )</option>
+	<option value=2>Atypical angina( 2 )</option>
+	<option value=3>Non anginal( 3 )</option>
+	<option value=4>Asymptomatic( 4 )</option>
+    </select>
+	<br>
+	<label for="heart "><b>Resting Blood Pressure (94-200)</b></label>
+	<input type="number" placeholder="enter mm/hg" name="Trestbps" required>
+	<label for="heart "><b>Serum Cholestrol(126-564)</b></label>
+	<input type="number" placeholder="enter mm/dl" name="chol" required>
+	<label for="FBS"><b>Fasting Blood sugar</b></label>
+	<br>
+	<select id="FBS" name="FBS">
+	<option selected>Choose your fbs</option>
+	<option value=1> Typical angina( 1 )(>120 mg/dl)</option>
+	<option value=0>Atypical angina( 0 )(< 120 mg/dl)</option>
+    </select>
+	<label for="resting"><b>Resting Electro cardiographic result</b></label>
+	<br>
+	<select id="re" name="resting">
+	<option selected>Choose your restecg</option>
+	<option value=0>Normal( 0 )</option>
+	<option value=1>Abnormality( 1 )</option>
+	<option value=2>Hypertrophy( 2 )</option>
+    </select>
+	 <label for="heart "><b>Maximum heart Rate (71-202)</b></label>
+    <input type="number" placeholder="enter Thali" name="hr" required>
+	
+	<label for="ang"><b>Exercise induced angina</b></label>
+	<br>
+	<select id="ang" name="angina">
+	<option selected>Choose your exang</option>
+	<option value=0>No( 0 )</option>
+	<option value=1>Yes( 1 )</option>
+	</select>
+	<label for="heart "><b>ST depression(0-6.2)</b></label>
+    <input type="number" placeholder="enter olpeak" name="st" required>
+	
+	<label for="st"><b>Slope of the peak Exercise ST segment</b></label>
+	<br>
+	<select id="st" name="slope">
+	<option selected>Choose your slope</option>
+	<option value=0>Nominal( 0 )</option>
+	<option value=0>Upsloping( 1 )</option>
+	<option value=1>Flat( 2 )</option>
+	<option value=2>Downsloping( 3 )</option>
+    </select>
+	
+	
+    <button type="submit" class="btn">Predict</button>
+  </form>
+<br>
+        {{ prediction_text }}<br>
+</div>
+</body>
+</html>
